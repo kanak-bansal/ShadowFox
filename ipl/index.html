@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RCB Official Fan Website - Royal Challengers Bengaluru 2026 IPL Champions">
+    <title>RCB Fan Hub | IPL 2026 Champions</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="logo">
+            <h1>RCB <span class="gold-text">CHAMPIONS</span></h1>
+        </div>
+        <nav class="nav">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark/Light Mode">🌙</button>
+            <button class="hamburger" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#home" class="active" data-target="home">Home</a></li>
+                <li><a href="#squad" data-target="squad">Squad</a></li>
+                <li><a href="#schedule" data-target="schedule">Schedule</a></li>
+                <li><a href="#stats" data-target="stats">Stats</a></li>
+                <li><a href="#news" data-target="news">News</a></li>
+                <li><a href="#fanzone" data-target="fanzone">Fan Zone</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- 1. HOME PAGE -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <img src="images/action.jpg" alt="RCB Champions Trophy Celebration" class="hero-trophy-img" loading="lazy">
+                    <h2 class="hero-title"><span class="typewriter-text">PLAY BOLD.</span><br>WE ARE THE <span class="gold-text">CHAMPIONS.</span></h2>
+                    <p class="hero-tagline">Celebrating the 2026 IPL Victory with the best fans in the world.</p>
+                    <button class="cta-btn" onclick="document.querySelector('a[data-target=\'squad\']').click()">Meet the Squad</button>
+                </div>
+            </div>
+
+            <div class="home-grid container section-padding">
+                <div class="next-match card fade-in">
+                    <h3>🏆 Next Match</h3>
+                    <div class="match-info">
+                        <div class="teams">
+                            <span class="team rcb">RCB</span>
+                            <span class="vs">vs</span>
+                            <span class="team csk">CSK</span>
+                        </div>
+                        <p class="date">May 31, 2026 | Narendra Modi Stadium</p>
+                        <div class="countdown" id="countdown">
+                            <!-- JS Countdown -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="latest-news card fade-in">
+                    <h3>📰 Latest News</h3>
+                    <div class="news-slider" id="news-slider">
+                        <!-- JS populated slider items -->
+                    </div>
+                    <div class="slider-controls" id="slider-controls">
+                        <!-- JS populated dots -->
+                    </div>
+                </div>
+
+                <div class="top-players card fade-in">
+                    <h3>🌟 Star Performers</h3>
+                    <div class="stars-grid" id="home-stars-grid">
+                        <!-- JS populated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Home Page Information -->
+            <div class="home-extra-info container section-padding">
+                <div class="extra-grid">
+                    <div class="standings-card card fade-in">
+                        <h3>📊 2026 Final Standings</h3>
+                        <div style="overflow-x: auto;" class="table-responsive">
+                            <table class="standings-table">
+                                <tr><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th></tr>
+                                <tr class="rcb-row"><td><strong>RCB</strong></td><td>14</td><td>10</td><td>4</td><td>20</td></tr>
+                                <tr><td>CSK</td><td>14</td><td>9</td><td>5</td><td>18</td></tr>
+                                <tr><td>KKR</td><td>14</td><td>8</td><td>6</td><td>16</td></tr>
+                                <tr><td>GT</td><td>14</td><td>8</td><td>6</td><td>16</td></tr>
+                            </table>
+                        </div>
+                        <a href="#" onclick="event.preventDefault(); document.querySelector(`a[data-target='stats']`).click();" class="read-more">View All Stats</a>
+                    </div>
+                    <div class="highlights-card card fade-in">
+                        <h3>🔥 Season Highlights</h3>
+                        <ul class="highlights-list">
+                            <li><strong>Most Runs:</strong> Virat Kohli (741) 🧡</li>
+                            <li><strong>Most Wickets:</strong> Mohd Siraj (21) ⚡</li>
+                            <li><strong>Highest Score:</strong> 287/3 vs SRH 🚀</li>
+                            <li><strong>Best Win Streak:</strong> 6 Matches 🏆</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-cta fade-in">
+                <div class="merch-content">
+                    <h2>GEAR UP LIKE A CHAMPION</h2>
+                    <p>Get the official 2026 Championship Jersey & Merchandise.</p>
+                    <button class="cta-btn gold-btn">Shop Now</button>
+                </div>
+            </div>
+
+            <div class="fan-ticker fade-in">
+                <div class="ticker-content">
+                    <span>"EE SALA CUP NAMDU BECOME EE SALA CUP NAMDE!" 🏆</span>
+                    <span>"KING KOHLI FOREVER!" ❤️</span>
+                    <span>"PLAY BOLD CHINNASWAMY!" 🔥</span>
+                    <span>"CHAMPIONS OF 2026!" 🥇</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SQUAD PAGE -->
+        <section id="squad" class="page-section hidden">
+            <div class="container section-padding">
+                <h2 class="section-title">The <span class="gold-text">Squad</span></h2>
+                <div class="filters fade-in">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="Batter">Batters</button>
+                    <button class="filter-btn" data-filter="Bowler">Bowlers</button>
+                    <button class="filter-btn" data-filter="All-rounder">All-rounders</button>
+                    <button class="filter-btn" data-filter="Wicketkeeper">Wicketkeepers</button>
+                </div>
+                <div class="squad-grid" id="squad-grid">
+                    <!-- Skeleton loading initially, then populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MATCH SCHEDULE PAGE -->
+        <section id="schedule" class="page-section hidden">
+            <div class="container section-padding">
+                <h2 class="section-title">2026 <span class="gold-text">Schedule</span></h2>
+                <div class="filters fade-in">
+                    <button class="filter-btn active" data-schedule-filter="all">All</button>
+                    <button class="filter-btn" data-schedule-filter="home">Home</button>
+                    <button class="filter-btn" data-schedule-filter="away">Away</button>
+                    <button class="filter-btn" data-schedule-filter="won">Won</button>
+                    <button class="filter-btn" data-schedule-filter="lost">Lost</button>
+                </div>
+                <div class="schedule-table-container fade-in">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Opponent</th>
+                                <th>Venue</th>
+                                <th>Result</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-tbody">
+                            <tr class="result-won"><td>May 04</td><td>GT</td><td>Chinnaswamy</td><td>Won</td><td>RCB 147/6, GT 146/10</td></tr>
+                            <tr class="result-won"><td>May 09</td><td>PBKS</td><td>Dharamshala</td><td>Won</td><td>RCB 241/7, PBKS 181/10</td></tr>
+                            <tr class="result-won"><td>May 12</td><td>DC</td><td>Chinnaswamy</td><td>Won</td><td>RCB 187/9, DC 140/10</td></tr>
+                            <tr class="result-won"><td>May 18</td><td>CSK</td><td>Chinnaswamy</td><td>Won</td><td>RCB 218/5, CSK 191/7</td></tr>
+                            <tr class="result-won"><td>May 24</td><td>RR</td><td>Ahmedabad</td><td>Won</td><td>RCB 200/5, RR 185/8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. STATISTICS PAGE -->
+        <section id="stats" class="page-section hidden">
+            <div class="container section-padding">
+                <h2 class="section-title">Season <span class="gold-text">Stats</span></h2>
+                
+                <div class="stats-summary fade-in">
+                    <div class="stat-card">
+                        <h4>Matches</h4>
+                        <p class="stat-value">16</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Won</h4>
+                        <p class="stat-value">11</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Lost</h4>
+                        <p class="stat-value">5</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>NRR</h4>
+                        <p class="stat-value">+0.865</p>
+                    </div>
+                </div>
+
+                <div class="charts-grid fade-in">
+                    <div class="chart-container card">
+                        <h3>Top 5 Run-Scorers</h3>
+                        <div class="css-bar-chart" id="cssRunsChart">
+                            <div class="bar-row"><span class="label">Virat Kohli</span><div class="bar-track"><div class="bar fill-gold" style="width: 100%;">741</div></div></div>
+                            <div class="bar-row"><span class="label">Faf du Plessis</span><div class="bar-track"><div class="bar fill-red" style="width: 69%;">512</div></div></div>
+                            <div class="bar-row"><span class="label">Rajat Patidar</span><div class="bar-track"><div class="bar fill-red" style="width: 66%;">489</div></div></div>
+                            <div class="bar-row"><span class="label">Glenn Maxwell</span><div class="bar-track"><div class="bar fill-red" style="width: 54%;">401</div></div></div>
+                            <div class="bar-row"><span class="label">Dinesh Karthik</span><div class="bar-track"><div class="bar fill-red" style="width: 38%;">287</div></div></div>
+                        </div>
+                    </div>
+                    <div class="chart-container card">
+                        <h3>Top 5 Wicket-Takers</h3>
+                        <div class="css-bar-chart" id="cssWicketsChart">
+                            <div class="bar-row"><span class="label">Mohammed Siraj</span><div class="bar-track"><div class="bar fill-gold" style="width: 100%;">21</div></div></div>
+                            <div class="bar-row"><span class="label">Yuzvendra Chahal</span><div class="bar-track"><div class="bar fill-red" style="width: 80%;">17</div></div></div>
+                            <div class="bar-row"><span class="label">Josh Hazlewood</span><div class="bar-track"><div class="bar fill-red" style="width: 66%;">14</div></div></div>
+                            <div class="bar-row"><span class="label">Harshal Patel</span><div class="bar-track"><div class="bar fill-red" style="width: 57%;">12</div></div></div>
+                            <div class="bar-row"><span class="label">Swapnil Singh</span><div class="bar-track"><div class="bar fill-red" style="width: 42%;">9</div></div></div>
+                        </div>
+                    </div>
+                    <div class="chart-container card">
+                        <h3>Win/Loss Ratio</h3>
+                        <div class="css-donut-chart">
+                            <div class="donut-hole">
+                                <span class="donut-text">11 W / 5 L</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. NEWS PAGE -->
+        <section id="news" class="page-section hidden">
+            <div class="container section-padding">
+                <h2 class="section-title">Latest <span class="gold-text">News</span></h2>
+                <div class="news-layout">
+                    <div class="news-main-content">
+                        <!-- Image Slider -->
+                        <div class="news-page-carousel" id="news-page-carousel">
+                            <div class="carousel-track" id="carousel-track">
+                                <!-- JS populated -->
+                            </div>
+                            <div class="carousel-indicators" id="carousel-indicators">
+                                <!-- JS populated -->
+                            </div>
+                        </div>
+                        
+                        <div class="news-grid" id="news-grid">
+                            <!-- JS populated -->
+                        </div>
+                    </div>
+                    <aside class="news-sidebar fade-in">
+                        <h3>Trending</h3>
+                        <ul id="trending-news">
+                            <!-- JS populated -->
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- News Modal -->
+            <div class="modal" id="news-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <img id="modal-img" src="" alt="News Image">
+                    <h2 id="modal-title"></h2>
+                    <p class="date-tag" id="modal-date"></p>
+                    <div id="modal-body"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FAN ZONE PAGE -->
+        <section id="fanzone" class="page-section hidden fanzone-bg">
+            <div class="container section-padding">
+                <h2 class="section-title text-white">Fan <span class="gold-text">Zone</span></h2>
+                
+                <div class="fanzone-grid">
+                    <div class="poll-widget glass-card fade-in">
+                        <h3 class="text-white">📊 Fan Poll</h3>
+                        <p class="text-light">Who should open the batting with Faf?</p>
+                        <div class="poll-options" id="poll-options">
+                            <!-- JS Populated -->
+                        </div>
+                        <p id="poll-message" class="hidden gold-text">Thanks for voting!</p>
+                    </div>
+
+                    <div class="quiz-widget glass-card fade-in">
+                        <h3 class="text-white">🧠 RCB Trivia</h3>
+                        <div id="quiz-container">
+                            <p id="question-text" class="text-light">Loading...</p>
+                            <div id="quiz-options" class="quiz-options"></div>
+                        </div>
+                        <p id="quiz-result" class="hidden gold-text"></p>
+                    </div>
+                </div>
+
+                <div class="chant-section glass-card fade-in mt-4 text-center">
+                    <h3 class="text-white">🎶 The Anthem</h3>
+                    <span class="anthem-text">"AAR YA PAAR, RCB KI BAARI HAI IS BAAR!"</span>
+                    <p class="text-light">Sing along at the Chinnaswamy and let the world hear you.</p>
+                    <a href="https://twitter.com/intent/tweet?text=AAR%20YA%20PAAR%2C%20RCB%20KI%20BAARI%20HAI%20IS%20BAAR!%20%23RCB%20%23PlayBold" target="_blank" class="cta-btn twitter-btn" style="background:#1DA1F2; margin-top:15px; display:inline-block; text-decoration:none;"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                </div>
+
+                <div class="message-board glass-card fade-in mt-4">
+                    <h3 class="text-white">✉️ Message the Team</h3>
+                    <form id="fan-form" class="fan-form">
+                        <input type="text" placeholder="Your Name" required class="glass-input">
+                        <textarea placeholder="Your Message to RCB" rows="4" required class="glass-input"></textarea>
+                        <button type="submit" class="cta-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to Top">↑</button>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 RCB Fan Hub. Designed by a passionate fan. Not affiliated with official BCCI.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" aria-label="Back to top">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

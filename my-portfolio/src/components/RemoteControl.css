@@ -1,0 +1,149 @@
+.remote-wrapper {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+}
+
+.remote-control {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 
+    10px 10px 20px rgba(0,0,0,0.5),
+    inset 2px 2px 5px rgba(255,255,255,0.1),
+    inset -2px -2px 5px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  border: 1px solid #333;
+}
+
+.remote-brand {
+  color: #888;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.5);
+}
+
+.remote-section {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.numpad button:last-child {
+  grid-column: 1 / span 2;
+  justify-self: center;
+  width: 100%;
+}
+
+.remote-btn {
+  background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+  border: none;
+  border-radius: 50%;
+  color: #ccc;
+  cursor: pointer;
+  box-shadow: 
+    3px 3px 6px rgba(0,0,0,0.6),
+    inset 1px 1px 2px rgba(255,255,255,0.2);
+  transition: all 0.1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.remote-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 
+    1px 1px 2px rgba(0,0,0,0.6),
+    inset 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.remote-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.power-btn {
+  width: 60px;
+  height: 60px;
+  color: #ff4444;
+}
+
+.power-on {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan);
+  box-shadow: 
+    3px 3px 6px rgba(0,0,0,0.6),
+    inset 1px 1px 2px rgba(0, 243, 255, 0.2);
+}
+
+.num-btn {
+  min-width: 80px;
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  height: 40px;
+  border-radius: 8px; /* Rectangular keys */
+  font-size: 0.9rem;
+}
+
+.num-btn.active {
+  color: var(--phosphor-green);
+  text-shadow: 0 0 5px var(--phosphor-green);
+}
+
+.action-btn {
+  width: 50px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+@media (max-width: 1024px) {
+  .remote-wrapper {
+    position: fixed;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 1rem;
+    top: auto;
+  }
+  .remote-control {
+    flex-direction: row;
+    padding: 1rem;
+    border-radius: 30px;
+    gap: 1rem;
+  }
+  .numpad {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .numpad button:last-child {
+    width: 40px;
+  }
+  .remote-brand {
+    display: none;
+  }
+  .power-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .num-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .action-btn {
+    width: 40px;
+    height: 40px;
+  }
+}

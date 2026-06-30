@@ -1,0 +1,256 @@
+:root {
+  /* Synthwave CRT Palette */
+  --bg-color: #0b0014;
+  --tv-frame: #111;
+  --neon-cyan: #00f3ff;
+  --neon-magenta: #ff00ff;
+  --phosphor-green: #0f0;
+  --text-main: #e0f2fe;
+  
+  --crt-glow-color: rgba(0, 243, 255, 0.15);
+  --crt-flicker-color: rgba(255, 0, 255, 0.05);
+
+  --font-display: 'VT323', monospace;
+  --font-body: 'Roboto Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--tv-frame);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6, .display-text {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.text-cyan { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); }
+.text-magenta { color: var(--neon-magenta); text-shadow: 0 0 5px var(--neon-magenta); }
+.text-green { color: var(--phosphor-green); text-shadow: 0 0 5px var(--phosphor-green); }
+
+/* CRT Base Setup */
+.crt-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 85vh;
+  background-color: var(--bg-color);
+  border-radius: 20px; /* TV tube curvature */
+  overflow: hidden;
+  box-shadow: 
+    0 0 50px rgba(0, 0, 0, 0.8) inset,
+    0 0 20px var(--crt-glow-color);
+  border: 15px solid #222;
+  border-bottom-width: 25px; /* Thicker bottom bezel */
+  border-top-color: #333;
+  border-left-color: #2a2a2a;
+}
+
+/* Inner shadow for tube curvature */
+.crt-container::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Scanlines overlay */
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Screen Flicker Animation */
+@keyframes flicker {
+  0% { opacity: 0.98; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.98; }
+  15% { opacity: 1; }
+  50% { opacity: 0.99; }
+  100% { opacity: 0.98; }
+}
+
+.crt-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+  z-index: 1;
+  animation: flicker 0.15s infinite;
+  
+  /* Slight blur for that phosphor glow feel */
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Hide scrollbar for CRT screen but allow scrolling */
+.crt-screen::-webkit-scrollbar {
+  width: 8px;
+}
+.crt-screen::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.3);
+}
+.crt-screen::-webkit-scrollbar-thumb {
+  background: rgba(0, 243, 255, 0.3);
+  border-radius: 4px;
+}
+
+/* Layout utilities */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Turn Off Animation */
+@keyframes turn-off {
+  0% {
+    transform: scale(1, 1.3) translate3d(0, 0, 0);
+    filter: brightness(1);
+  }
+  60% {
+    transform: scale(1, 0.001) translate3d(0, 0, 0);
+    filter: brightness(10);
+  }
+  100% {
+    transform: scale(0, 0.001) translate3d(0, 0, 0);
+    filter: brightness(0);
+  }
+}
+
+.screen-off {
+  animation: turn-off 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.screen-black {
+  background-color: black !important;
+  opacity: 0 !important;
+}
+
+/* Static Noise Animation */
+@keyframes staticNoiseAnim {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+  100% { transform: translate(0, 0); }
+}
+
+.static-noise-bg {
+  animation: staticNoiseAnim 0.1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Glitch Hover Effect for Home Channel */
+.glitch-hover {
+  transition: all 0.2s ease;
+}
+
+.glitch-hover:hover {
+  animation: glitch-anim 0.2s linear infinite;
+  color: #fff;
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0); text-shadow: 0 0 10px var(--neon-cyan); }
+  20% { transform: translate(-3px, 3px); text-shadow: -3px 0 #ff00ff, 3px 0 #00f3ff; }
+  40% { transform: translate(-3px, -3px); text-shadow: 3px 0 #ff00ff, -3px 0 #00f3ff; }
+  60% { transform: translate(3px, 3px); text-shadow: -3px 0 #ff00ff, 3px 0 #00f3ff; }
+  80% { transform: translate(3px, -3px); text-shadow: 3px 0 #ff00ff, -3px 0 #00f3ff; }
+  100% { transform: translate(0); text-shadow: 0 0 10px var(--neon-cyan); }
+}
+
+/* Synthwave Horizon Grid Background */
+.synthwave-grid-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  perspective: 400px;
+  overflow: hidden;
+  z-index: 0;
+  mask-image: linear-gradient(transparent, black 60%);
+  -webkit-mask-image: linear-gradient(transparent, black 60%);
+}
+
+.synthwave-grid {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    linear-gradient(rgba(0, 243, 255, 0.5) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.3) 2px, transparent 2px);
+  background-size: 50px 50px;
+  transform: rotateX(75deg);
+  transform-origin: top center;
+  animation: gridMove 2s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 50px; }
+}
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+  100% { transform: translate(0, 0); }
+}
+
+.static-noise-bg {
+  animation: staticNoiseAnim 0.1s infinite;
+}
